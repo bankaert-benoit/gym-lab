@@ -5,7 +5,7 @@
 
 import { useColorScheme } from 'react-native';
 
-import { Colors } from '@/constants/Colors';
+import { Colors, Palette, Palettes } from '@/constants/Colors';
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
@@ -19,4 +19,22 @@ export function useThemeColor(
   } else {
     return Colors[theme][colorName];
   }
+}
+
+export function useThemePalette(
+  props: { light?: string; dark?: string },
+  paletteName: keyof Palette
+) {
+  const theme = useColorScheme() ?? 'light';
+  const paletteFromProps = props[theme];
+
+  if (paletteFromProps) {
+    return paletteFromProps;
+  } else {
+    return Palettes[theme][paletteName];
+  }
+}
+
+export function usePalette(theme: 'light' | 'dark'): Palette {
+  return Palettes[theme];
 }
