@@ -1,15 +1,17 @@
 import GainCarousel from "@/components/hall-of-gain/GainCarousel";
+import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
 import { GainData } from "@/models/GainData";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Button, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const palette = usePalette('dark');
 
 export default function HallOfGain() {
+  const auth = FIREBASE_AUTH;
   const data: GainData[] = [
     {
       id: 1,
@@ -41,6 +43,9 @@ export default function HallOfGain() {
         }}>
           <MaterialCommunityIcons color={palette.light} size={28} name="chart-box-outline"/>
         </Link>
+          <Button color={palette.primary} title="Sign out" onPress={() => {
+            auth.signOut();
+          }} />
       </View>
       <GainCarousel datas={data} setCurrentIndex={setCurrentIdx} />
     </SafeAreaView>
