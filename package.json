@@ -11,7 +11,8 @@
     "test": "jest --watchAll",
     "lint": "expo lint",
     "build:android:local": "eas build -p android --local --output=gymlab.apk --profile=preview",
-    "build:ios:local": "eas build -p ios --local --output=gymlab.ipa --profile=preview"
+    "build:ios:local": "eas build -p ios --local --output=gymlab.ipa --profile=preview",
+    "prebuild": "expo prebuild"
   },
   "jest": {
     "preset": "jest-expo"
