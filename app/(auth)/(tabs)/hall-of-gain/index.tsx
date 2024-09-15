@@ -16,7 +16,7 @@ export default function HallOfGain() {
     {
       id: 1,
       title: "Benchpress",
-      data: 155,
+      data: 170,
     },
     {
       id: 2,
