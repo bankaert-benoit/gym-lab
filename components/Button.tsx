@@ -1,4 +1,4 @@
-import { Palette } from "@/constants/Colors";
+import { Palette } from "@/constants/colors.constant";
 import { usePalette } from "@/hooks/useThemeColor";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ComponentProps } from "react";

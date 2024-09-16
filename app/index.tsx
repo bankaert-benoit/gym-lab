@@ -1,21 +1,24 @@
 import Button from "@/components/Button";
+import Input from "@/components/Input";
+import { Palette } from "@/constants/colors.constant";
 import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { State } from "@/models/state.model";
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 
-const { dark, light, primary,  } = usePalette('dark');
+const { dark, light, primary }: Palette = usePalette('dark');
 
-export default function Index() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+export default function Index(): React.JSX.Element {
+  const [email, setEmail]: State<string> = useState<string>('');
+  const [password, setPassword]: State<string> = useState<string>('');
+  const [isFormValid, setIsFormValid]: State<boolean> = useState<boolean>(false);
+  const [loading, setLoading]: State<boolean> = useState<boolean>(false);
 
-  const auth = FIREBASE_AUTH;
+  const auth: Auth = FIREBASE_AUTH;
 
-  const signUp = async () => {
+  const signUp: () => Promise<void> = async () => {
     setLoading(true);
     try {
       createUserWithEmailAndPassword(auth, email, password);
@@ -26,7 +29,7 @@ export default function Index() {
     }
   };
 
-  const signIn = async () => {
+  const signIn: () => Promise<void> = async () => {
     setLoading(true);
     try {
       signInWithEmailAndPassword(auth, email, password);
@@ -44,16 +47,18 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior="padding">
-        <TextInput 
-          style={styles.input}
+        <Input 
+          color={light}
+          borderColor={primary}
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
           keyboardType="email-address"
         />
-        <TextInput 
-          style={styles.input}
+        <Input 
+          color={light}
+          borderColor={primary}
           placeholder="Password"
           value={password}
           autoCapitalize="none"
@@ -71,7 +76,7 @@ export default function Index() {
       </KeyboardAvoidingView>
 
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

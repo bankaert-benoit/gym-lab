@@ -1,6 +1,7 @@
 import HeaderBar from "@/components/header/HeaderBar";
 import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
+import { State } from "@/models/state.model";
 import { Router, Slot, Stack, useRouter, useSegments } from "expo-router";
 import { Auth, User } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -9,8 +10,8 @@ import { ActivityIndicator, SafeAreaView } from "react-native";
 export default function RootLayout() {
   const { primary, dark } = usePalette('dark');
   const auth: Auth = FIREBASE_AUTH;
-  const [initializing, setInitializing] = useState<boolean>(true);
-  const [user, setUser] = useState<User | null>(null);
+  const [initializing, setInitializing]: State<boolean> = useState<boolean>(true);
+  const [user, setUser]: State<User | null> = useState<User | null>(null);
   const router: Router = useRouter();
   const segments = useSegments();
 

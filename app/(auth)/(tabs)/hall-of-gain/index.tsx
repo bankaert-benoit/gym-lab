@@ -1,11 +1,12 @@
 import GainCarousel from "@/components/hall-of-gain/GainCarousel";
 import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
-import { GainData } from "@/models/GainData";
+import { GainData } from "@/models/gain-data.model";
+import { State } from "@/models/state.model";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Button, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const palette = usePalette('dark');
@@ -16,21 +17,24 @@ export default function HallOfGain() {
     {
       id: 1,
       title: "Benchpress",
+      exerciseId: "1",
       data: 170,
     },
     {
       id: 2,
+      exerciseId: "2",
       title: "Squat",
       data: 200,
     },
     {
       id: 3,
+      exerciseId: "3",
       title: "Deadlift",
       data: 250,
     },
   ];
 
-  const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [currentIdx, setCurrentIdx]: State<number> = useState<number>(0);
 
   return (
     <SafeAreaView

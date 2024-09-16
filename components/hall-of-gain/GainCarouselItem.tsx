@@ -1,5 +1,5 @@
 import { usePalette } from '@/hooks/useThemeColor';
-import { GainData } from '@/models/GainData';
+import { GainData } from '@/models/gain-data.model';
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated';

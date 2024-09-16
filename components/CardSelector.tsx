@@ -2,7 +2,7 @@ import { StyleProp, Text, View } from "react-native"
 
 export type CardSelectorProps = {
   title: string,
-  data: string,
+  data: string | number,
   textColor?: string,
   cardStyle?: StyleProp<any>
 }

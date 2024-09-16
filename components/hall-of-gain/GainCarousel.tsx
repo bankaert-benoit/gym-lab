@@ -1,12 +1,12 @@
-import { GainData } from "@/models/GainData";
+import { GainData } from "@/models/gain-data.model";
+import { Dispatch, SetStateAction, useRef } from "react";
 import { View, ViewToken } from "react-native";
 import Animated, { ScrollHandlerProcessed, SharedValue, useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
 import GainCarouselItem from "./GainCarouselItem";
-import { useRef, useState } from "react";
 
 export type CarouselProps = {
   datas: GainData[],
-  setCurrentIndex?: (index: number) => void;
+  setCurrentIndex?: Dispatch<SetStateAction<number>>;
 };
 
 
