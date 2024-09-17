@@ -1,9 +1,8 @@
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
 
 export type InputProps = {
-  color: string,
-  borderColor: string,
-
+  color?: string,
+  borderColor?: string,
 } & TextInputProps;
 
 export default function Input(props: InputProps) {
@@ -16,8 +15,8 @@ export default function Input(props: InputProps) {
       borderRadius: 4,
       borderColor: props.borderColor,
       padding: 10,
-      width: 300,
+      width: "100%",
     }
   })
-  return <TextInput style={[styles.input, props.style]} {...props} />;
+  return <TextInput style={styles.input} {...props} />;
 }

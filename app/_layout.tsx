@@ -1,8 +1,7 @@
-import HeaderBar from "@/components/header/HeaderBar";
 import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
 import { State } from "@/models/state.model";
-import { Router, Slot, Stack, useRouter, useSegments } from "expo-router";
+import { Router, Stack, useRouter, useSegments } from "expo-router";
 import { Auth, User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, SafeAreaView } from "react-native";
@@ -55,7 +54,7 @@ export default function RootLayout() {
     <Stack screenOptions={{
       headerShown: false
     }}>
-      <Stack.Screen name="index" />
+      <Stack.Screen name="(public)/login" />
       <Stack.Screen name="(auth)" /> 
     </Stack>
   );

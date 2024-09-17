@@ -2,7 +2,7 @@ import { Palette } from "@/constants/colors.constant";
 import { usePalette } from "@/hooks/useThemeColor";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ComponentProps } from "react";
-import { ActivityIndicator, StyleSheet, Text, TouchableHighlight, TouchableHighlightProps, TouchableOpacity, TouchableOpacityProps, View } from "react-native";
+import { ActivityIndicator, StyleProp, StyleSheet, Text, TouchableHighlight, TouchableHighlightProps, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from "react-native";
 
 export type ButtonProps = {
   title: string;
@@ -13,6 +13,7 @@ export type ButtonProps = {
   loading?: boolean;
   icon?: ComponentProps<typeof MaterialCommunityIcons>['name'];
   iconPosition?: "left" | "right";
+  buttonStyle?: StyleProp<ViewStyle>;
 };
 
 export default function Button(props: ButtonProps) {
@@ -50,7 +51,7 @@ export default function Button(props: ButtonProps) {
   };
 
   return (
-    <TouchableHighlight onPress={handlePress} disabled={props.disabled}>
+    <TouchableHighlight onPress={handlePress} disabled={props.disabled} style={props.buttonStyle}>
       <View style={props.disabled ? styles.disabled : styles.active}>
         {props.loading ? (
           <ActivityIndicator color={props.color} size={"small"} />
