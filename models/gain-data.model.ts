@@ -13,8 +13,7 @@ export type GainData = {
 
 export type PersonalRecord = {
   id: number,
-  exerciseId: DocumentReference<Exercise>,
   exercise?: Exercise,
   weight: number,
-  user?: DocumentReference<User>, // TODO: Remove the optional
+  user?: User, // TODO: Remove the optional
 }

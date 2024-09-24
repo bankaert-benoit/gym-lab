@@ -6,7 +6,7 @@ export type TrainingBloc = {
   id: number;
   title: string;
   weeks: TrainingWeek[];
-  user: DocumentReference<User>;
+  user?: User;
 };
 
 export type TrainingWeek = {
@@ -23,7 +23,6 @@ export type TrainingDay = {
 };
 
 export type TrainingExercise = {
-  exerciceId: DocumentReference<Exercise>;
   exercice?: Exercise;
   numberOfSets: number;
   numberOfReps: number;

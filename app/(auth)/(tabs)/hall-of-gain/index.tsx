@@ -1,7 +1,8 @@
-import GainCarousel from "@/components/hall-of-gain/GainCarousel";
+import PersonalRecordCarousel from "@/components/hall-of-gain/PersonalRecordCarousel";
+import ItemLine from "@/components/ItemLine";
 import { FIREBASE_AUTH } from "@/firebaseConfig";
 import { usePalette } from "@/hooks/useThemeColor";
-import { GainData } from "@/models/gain-data.model";
+import { GainData, PersonalRecord } from "@/models/gain-data.model";
 import { State } from "@/models/state.model";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
@@ -13,24 +14,49 @@ const palette = usePalette('dark');
 
 export default function HallOfGain() {
   const auth = FIREBASE_AUTH;
-  const data: GainData[] = [
+  const data: PersonalRecord[] = [
     {
       id: 1,
-      title: "Benchpress",
-      exerciseId: "1",
-      data: 170,
+      weight: 170,
+      exercise: {
+        id: "1",
+        name: "Bench Press",
+        muscles: [],
+      }
+
     },
     {
       id: 2,
-      exerciseId: "2",
-      title: "Squat",
-      data: 200,
+      weight: 200,
+      exercise: {
+        id: "2",
+        name: "Squat",
+        muscles: [],
+      }
     },
     {
       id: 3,
-      exerciseId: "3",
-      title: "Deadlift",
-      data: 250,
+      weight: 250,
+      exercise: {
+        id: "3",
+        name: "Deadlift",
+        muscles: [],
+      }
+    },
+  ];
+
+  const history: { date: Date, weight: number }[] = [
+    {
+      date: new Date(),
+      weight: 170,
+    },
+    {
+      date: new Date(),
+      weight: 200,
+    },
+    {
+      date: new Date(),
+      weight: 250,
     },
   ];
 
@@ -43,7 +69,7 @@ export default function HallOfGain() {
       <View style={styles.statIconContainer}>
         <Link href={{
           pathname: '/hall-of-gain/[id]',
-          params: { id: data[currentIdx].title }
+          params: { id: data[currentIdx].exercise?.name as string }
         }}>
           <MaterialCommunityIcons color={palette.light} size={28} name="chart-box-outline"/>
         </Link>
@@ -51,7 +77,9 @@ export default function HallOfGain() {
             auth.signOut();
           }} />
       </View>
-      <GainCarousel datas={data} setCurrentIndex={setCurrentIdx} />
+      <PersonalRecordCarousel datas={data} setCurrentIndex={setCurrentIdx} />
+      <ItemLine color={palette.darkGray} textColor={palette.light} item={['test', 'oui']} />
+     
     </SafeAreaView>
   );
 }

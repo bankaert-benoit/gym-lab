@@ -1,16 +1,16 @@
-import { GainData } from "@/models/gain-data.model";
+import { PersonalRecord } from "@/models/gain-data.model";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { View, ViewToken } from "react-native";
 import Animated, { ScrollHandlerProcessed, SharedValue, useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
-import GainCarouselItem from "./GainCarouselItem";
+import PersonalRecordCarouselItem from "./PersonalRecordCarouselItem";
 
 export type CarouselProps = {
-  datas: GainData[],
+  datas: PersonalRecord[],
   setCurrentIndex?: Dispatch<SetStateAction<number>>;
 };
 
 
-export default function GainCarousel({ datas, setCurrentIndex }: CarouselProps) {
+export default function PersonalRecordCarousel({ datas, setCurrentIndex }: CarouselProps) {
   const scrollX: SharedValue<number> = useSharedValue(0);
   const onScrollHandler: ScrollHandlerProcessed<Record<string, unknown>> = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -33,7 +33,7 @@ export default function GainCarousel({ datas, setCurrentIndex }: CarouselProps) 
     <View>
       <Animated.FlatList 
         data={datas} 
-        renderItem={({item, index}) => <GainCarouselItem item={item} index={index} scrollX={scrollX} />}
+        renderItem={({item, index}) => <PersonalRecordCarouselItem item={item} index={index} scrollX={scrollX} />}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled

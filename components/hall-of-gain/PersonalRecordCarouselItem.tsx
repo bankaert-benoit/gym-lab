@@ -1,18 +1,18 @@
 import { usePalette } from '@/hooks/useThemeColor';
-import { GainData } from '@/models/gain-data.model';
+import { GainData, PersonalRecord } from '@/models/gain-data.model';
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import Animated, { Extrapolation, interpolate, SharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, { Extrapolation, interpolate, interpolateColor, SharedValue, useAnimatedStyle } from 'react-native-reanimated';
 
 export type GainCarouselItemProps = {
-  item: GainData;
+  item: PersonalRecord;
   index: number;
   scrollX: SharedValue<number>;
 };
 const { width, height } = Dimensions.get('screen');
-const { primary, light } = usePalette('dark');
+const { primary, light, secondary } = usePalette('dark');
 
-export default function GainCarouselItem({item, index, scrollX}: GainCarouselItemProps) {
+export default function PersonalRecordCarouselItem({item, index, scrollX}: GainCarouselItemProps) {
   const rnAnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -20,7 +20,7 @@ export default function GainCarouselItem({item, index, scrollX}: GainCarouselIte
           translateX: interpolate(
             scrollX.value,
             [(index - 1) * width, index * width, (index + 1) * width],
-            [-width * 0.25 , 0, width * 0.25],
+            [-width * 0.3 , 0, width * 0.3],
             Extrapolation.CLAMP
           ),
         },
@@ -32,19 +32,43 @@ export default function GainCarouselItem({item, index, scrollX}: GainCarouselIte
             Extrapolation.CLAMP
           )
         },
+        {
+          rotate: `${interpolate(
+            scrollX.value,
+            [(index - 1) * width, index * width, (index + 1) * width],
+            [-30, 0, 30],
+            Extrapolation.CLAMP
+          )}deg`
+        },
       ],
+      opacity: interpolate(
+        scrollX.value,
+        [(index - 1) * width, index * width, (index + 1) * width],
+        [0.5, 1, 0.5],
+        Extrapolation.CLAMP
+      ),
+    }
+  });
+  const cardColorAnimationStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        scrollX.value,
+        [(index - 1) * width, index * width, (index + 1) * width],
+        [secondary, primary, secondary],
+        "RGB"
+      )
     }
   });
   return (
     <Animated.View style={[styles.container, rnAnimatedStyle]}>
-      <View style={styles.card}>
-        <Text style={styles.text}>{item.title}</Text>
+      <Animated.View style={[styles.card, cardColorAnimationStyle]}>
+        <Text style={styles.text}>{item.exercise?.name}</Text>
         <Text style={{
           ...styles.text,
           textAlign: "right",
           fontSize: 30,       
-        }}>{item.data}kg</Text>
-      </View>
+        }}>{item.weight}kg</Text>
+      </Animated.View>
     </Animated.View>
   )
 }
